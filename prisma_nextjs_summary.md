@@ -11,7 +11,7 @@
   ```
 - ติดตั้ง Prisma:
   ```bash
-  npm install prisma @prisma/client
+  npm install -D prisma @prisma/client
   ```
 - เริ่มต้น Prisma:
   ```bash
@@ -22,17 +22,20 @@
 ## 2. การเชื่อมต่อ MySQL Database
 
 ในไฟล์ `.env`:
+
 ```env
 DATABASE_URL="mysql://username:password@host:port/dbname"
 ```
 
 **ปัญหาที่เจอ:**
+
 - ถ้า user ไม่มีสิทธิ์สร้าง shadow database จะ migrate ไม่ได้ ต้องแก้สิทธิ์ หรือสร้าง shadow database เอง
 - หากถูกปฏิเสธการเข้าถึง (access denied) ให้ใช้ `GRANT` สิทธิ์ใหม่ให้ user
 
 ## 3. การตั้งค่า Prisma Client (TypeScript)
 
 ใน `lib/prisma.ts`:
+
 ```typescript
 import { PrismaClient } from "@prisma/client";
 
@@ -51,15 +54,16 @@ export default prisma;
 
 ## 4. ความแตกต่างระหว่างคำสั่ง Prisma
 
-| คำสั่ง | ทำอะไร | หมายเหตุ |
-|:------|:------|:------|
-| `npx prisma migrate dev --name init` | สร้าง migration ไฟล์ และอัปเดตฐานข้อมูล | เก็บประวัติ, ใช้ shadow database |
-| `npx prisma db push` | Sync schema ไปฐานข้อมูลทันทีโดยไม่มีไฟล์ migration | เร็ว, ง่าย แต่ rollback ไม่ได้ |
-| `npx prisma generate` | สร้าง Prisma Client ใหม่จาก schema.prisma | ต้องใช้หลังเปลี่ยน schema |
+| คำสั่ง                               | ทำอะไร                                             | หมายเหตุ                         |
+| :----------------------------------- | :------------------------------------------------- | :------------------------------- |
+| `npx prisma migrate dev --name init` | สร้าง migration ไฟล์ และอัปเดตฐานข้อมูล            | เก็บประวัติ, ใช้ shadow database |
+| `npx prisma db push`                 | Sync schema ไปฐานข้อมูลทันทีโดยไม่มีไฟล์ migration | เร็ว, ง่าย แต่ rollback ไม่ได้   |
+| `npx prisma generate`                | สร้าง Prisma Client ใหม่จาก schema.prisma          | ต้องใช้หลังเปลี่ยน schema        |
 
 ## 5. การใช้งาน Prisma Client
 
 ตัวอย่างการดึงข้อมูลใน Next.js App Router:
+
 ```typescript
 import { prisma } from "@/lib/prisma";
 
@@ -71,7 +75,9 @@ export default async function UsersPage() {
       <h1>Users</h1>
       <ul>
         {users.map((user) => (
-          <li key={user.id}>{user.name} ({user.email})</li>
+          <li key={user.id}>
+            {user.name} ({user.email})
+          </li>
         ))}
       </ul>
     </div>
@@ -88,8 +94,19 @@ export default async function UsersPage() {
 ---
 
 **สรุป:**
+
 - ถ้าอยากได้ migration เก็บประวัติ -> `npx prisma migrate dev`
 - ถ้าอยาก sync schema แบบเร็ว -> `npx prisma db push`
 - เปลี่ยน schema เสร็จ ต้อง `npx prisma generate` ทุกครั้ง
 
 **จบไฟล์** 🚀
+
+เก็บ images เป็น JSON string
+images: JSON.stringify([
+"https://example.com/galaxys24-front.jpg",
+"https://example.com/galaxys24-back.jpg",
+"https://example.com/galaxys24-side.jpg",
+]),
+
+แปลงกลับเป็น Array
+JSON.parse(product.images)
