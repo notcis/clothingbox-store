@@ -1,0 +1,13 @@
+import { PrismaClient } from "@/prisma/app/generated/prisma/client";
+
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClient | undefined;
+};
+
+export const prisma =
+  globalForPrisma.prisma ??
+  new PrismaClient({
+    log: ["query"], // Dev เท่านั้น เอาไว้ debug query ได้
+  });
+
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
