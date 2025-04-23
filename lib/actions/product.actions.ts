@@ -11,7 +11,13 @@ export async function getLatestProducts() {
     },
   });
 
-  return convertToPlainObject(data);
+  const sanitizedProducts = data.map((product) => ({
+    ...product,
+    price: product.price.toString(), // หรือ +product.price เพื่อให้เป็น number
+    rating: product.rating.toString(), // ถ้า rating ก็เป็น Decimal
+  }));
+
+  return convertToPlainObject(sanitizedProducts);
 }
 
 export async function getProductBySlug(slug: string) {
