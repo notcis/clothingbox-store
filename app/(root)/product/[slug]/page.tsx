@@ -1,3 +1,4 @@
+import ProductImages from "@/components/shared/product/product-images";
 import ProductPrice from "@/components/shared/product/product-price";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -18,7 +19,9 @@ export default async function ProductDetailPage(props: {
     <>
       <section>
         <div className="grid grid-cols-1 md:grid-cols-5">
-          <div className="col-span-2"></div>
+          <div className="col-span-2">
+            <ProductImages images={JSON.parse(product.images)} />
+          </div>
           <div className="col-span-2 p-5">
             <div className="flex flex-col gap-6">
               <p>
