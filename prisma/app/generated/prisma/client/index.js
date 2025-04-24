@@ -245,7 +245,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\github\\Udemy-Couse\\nextJs\\typscript\\prostore\\prisma\\app\\generated\\prisma\\client",
+      "value": "D:\\1-Udemy\\nextjs\\Course-5\\prostore\\prisma\\app\\generated\\prisma\\client",
       "fromEnvVar": null
     },
     "config": {
@@ -259,7 +259,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\github\\Udemy-Couse\\nextJs\\typscript\\prostore\\prisma\\schema.prisma",
+    "sourceFilePath": "D:\\1-Udemy\\nextjs\\Course-5\\prostore\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
