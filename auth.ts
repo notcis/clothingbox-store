@@ -5,6 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { compareSync } from "bcrypt-ts-edge";
 
 export const config = {
+  trustHost: true,
   pages: {
     signIn: "/sign-in",
     error: "/sign-in", // Error code passed in query string as ?error=
