@@ -6,10 +6,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { getProductBySlug } from "@/lib/actions/product.actions";
 import { notFound } from "next/navigation";
 
-export default async function ProductDetailPage(props: {
+export default async function ProductDetailPage({
+  params,
+}: {
   params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await props.params;
+  const { slug } = await params;
 
   const product = await getProductBySlug(slug);
 
