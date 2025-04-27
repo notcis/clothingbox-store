@@ -42,7 +42,7 @@ export default function SignUpForm() {
             autoComplete="name"
             defaultValue={signUpDefaultValues.name}
           />
-        </div>{" "}
+        </div>
         <div>
           <Label htmlFor="email">Email</Label>
           <Input
