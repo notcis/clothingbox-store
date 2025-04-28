@@ -181,14 +181,41 @@ exports.Prisma.VerificationTokenScalarFieldEnum = {
   expires: 'expires'
 };
 
+exports.Prisma.CartScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  sessionCartId: 'sessionCartId',
+  items: 'items',
+  itemsPrice: 'itemsPrice',
+  totalPrice: 'totalPrice',
+  shippingPrice: 'shippingPrice',
+  taxPrice: 'taxPrice',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
 };
 
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.NullableJsonNullValueInput = {
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
 };
 
 exports.Prisma.NullsOrder = {
@@ -201,21 +228,9 @@ exports.Prisma.ProductOrderByRelevanceFieldEnum = {
   name: 'name',
   slug: 'slug',
   category: 'category',
-  images: 'images',
   brand: 'brand',
   description: 'description',
   banner: 'banner'
-};
-
-exports.Prisma.JsonNullValueFilter = {
-  DbNull: Prisma.DbNull,
-  JsonNull: Prisma.JsonNull,
-  AnyNull: Prisma.AnyNull
-};
-
-exports.Prisma.QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
 };
 
 exports.Prisma.UserOrderByRelevanceFieldEnum = {
@@ -253,13 +268,20 @@ exports.Prisma.VerificationTokenOrderByRelevanceFieldEnum = {
   token: 'token'
 };
 
+exports.Prisma.CartOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  sessionCartId: 'sessionCartId'
+};
+
 
 exports.Prisma.ModelName = {
   Product: 'Product',
   User: 'User',
   Account: 'Account',
   Session: 'Session',
-  VerificationToken: 'VerificationToken'
+  VerificationToken: 'VerificationToken',
+  Cart: 'Cart'
 };
 
 /**

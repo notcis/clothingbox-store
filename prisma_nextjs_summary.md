@@ -110,3 +110,6 @@ images: JSON.stringify([
 
 แปลงกลับเป็น Array
 JSON.parse(product.images)
+
+prisma seed data
+npx tsx ./db/seed
