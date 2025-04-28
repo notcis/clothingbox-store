@@ -82,7 +82,7 @@ export const config = {
       }
       return token;
     },
-    authorized({ request, auth }: any) {
+    async authorized({ request, auth }: any) {
       if (!request.cookies.get("sessionCartId")) {
         const sessionCartId = crypto.randomUUID();
         const newRequestHeaders = new Headers(request.headers);
@@ -91,7 +91,7 @@ export const config = {
         });
 
         response.cookies.set("sessionCartId", sessionCartId);
-        return true;
+        return response;
       } else {
         return true;
       }
