@@ -35,3 +35,8 @@ export function formatError(error: any) {
       : JSON.stringify(error.message);
   }
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function ConvertJsonDbToString(value: any) {
+  return typeof value === "string" ? JSON.parse(value) : [];
+}

@@ -22,7 +22,7 @@ export default async function ProductDetailPage({
       <section>
         <div className="grid grid-cols-1 md:grid-cols-5">
           <div className="col-span-2">
-            <ProductImages images={JSON.parse(product.images)} />
+            <ProductImages images={product.images} />
           </div>
           <div className="col-span-2 p-5">
             <div className="flex flex-col gap-6">
