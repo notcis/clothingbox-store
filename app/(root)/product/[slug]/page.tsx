@@ -1,7 +1,7 @@
+import AddToCart from "@/components/shared/product/add-to-cart";
 import ProductImages from "@/components/shared/product/product-images";
 import ProductPrice from "@/components/shared/product/product-price";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getProductBySlug } from "@/lib/actions/product.actions";
 import { notFound } from "next/navigation";
@@ -48,13 +48,13 @@ export default async function ProductDetailPage({
           <div>
             <Card>
               <CardContent className="p-4">
-                <div className=" mb-2 flex justify-between">
+                <div className="mb-2 flex justify-between">
                   <div>Price</div>
                   <div>
                     <ProductPrice value={Number(product.price)} />
                   </div>
                 </div>
-                <div className=" mb-2 flex justify-between">
+                <div className="mb-2 flex justify-between">
                   <div>Status</div>
                   {product.stock > 0 ? (
                     <Badge variant="outline">In Stock</Badge>
@@ -64,7 +64,16 @@ export default async function ProductDetailPage({
                 </div>
                 {product.stock > 0 && (
                   <div className="flex-center">
-                    <Button className="w-full">Add To Cart</Button>
+                    <AddToCart
+                      item={{
+                        productId: product.id,
+                        name: product.name,
+                        slug: product.slug,
+                        price: product.price.toString(),
+                        qty: 1,
+                        image: product.images![0],
+                      }}
+                    />
                   </div>
                 )}
               </CardContent>
