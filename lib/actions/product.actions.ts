@@ -1,5 +1,5 @@
 "use server";
-import { ConvertJsonDbToString, convertToPlainObject } from "../utils";
+import { ConvertJsonDbToStringArray, convertToPlainObject } from "../utils";
 import { LATEST_PRODUCTS_LIMIT } from "../constants";
 import { prisma } from "@/db/prisma";
 
@@ -15,7 +15,7 @@ export async function getLatestProducts() {
     ...product,
     price: product.price.toString(), // หรือ +product.price เพื่อให้เป็น number
     rating: product.rating.toString(), // ถ้า rating ก็เป็น Decimal
-    images: ConvertJsonDbToString(product.images),
+    images: ConvertJsonDbToStringArray(product.images),
   }));
 
   return convertToPlainObject(sanitizedProducts);
@@ -32,6 +32,6 @@ export async function getProductBySlug(slug: string) {
 
   return {
     ...data,
-    images: ConvertJsonDbToString(data.images),
+    images: ConvertJsonDbToStringArray(data.images),
   };
 }

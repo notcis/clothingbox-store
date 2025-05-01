@@ -37,6 +37,16 @@ export function formatError(error: any) {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function ConvertJsonDbToString(value: any) {
-  return typeof value === "string" ? JSON.parse(value) : [];
+export function ConvertJsonDbToStringArray(value: any) {
+  return value ? JSON.parse(value) : [];
+}
+
+export function round2(value: number | string) {
+  if (typeof value === "number") {
+    return Math.round((value + Number.EPSILON) * 100) / 100;
+  } else if (typeof value === "string") {
+    return Math.round((Number(value) + Number.EPSILON) * 100) / 100;
+  } else {
+    throw new Error("Value is not a nnumber or string");
+  }
 }
