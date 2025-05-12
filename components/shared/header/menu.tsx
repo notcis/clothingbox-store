@@ -32,7 +32,7 @@ export default function Menu() {
             <SheetTitle>Menu</SheetTitle>
             <ModeToggle />
             <Button asChild variant="ghost">
-              <Link href="cart">
+              <Link href="/cart">
                 <ShoppingCartIcon />
               </Link>
             </Button>
