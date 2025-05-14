@@ -193,6 +193,33 @@ exports.Prisma.CartScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.OrderScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  shippingAddress: 'shippingAddress',
+  paymentMethod: 'paymentMethod',
+  paymentResult: 'paymentResult',
+  itemsPrice: 'itemsPrice',
+  shippingPrice: 'shippingPrice',
+  taxPrice: 'taxPrice',
+  totalPrice: 'totalPrice',
+  isPaid: 'isPaid',
+  paidAt: 'paidAt',
+  isDelivered: 'isDelivered',
+  deliveredAt: 'deliveredAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.OrderItemScalarFieldEnum = {
+  orderId: 'orderId',
+  productId: 'productId',
+  qty: 'qty',
+  price: 'price',
+  name: 'name',
+  slug: 'slug',
+  image: 'image'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -274,6 +301,20 @@ exports.Prisma.CartOrderByRelevanceFieldEnum = {
   sessionCartId: 'sessionCartId'
 };
 
+exports.Prisma.OrderOrderByRelevanceFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  paymentMethod: 'paymentMethod'
+};
+
+exports.Prisma.OrderItemOrderByRelevanceFieldEnum = {
+  orderId: 'orderId',
+  productId: 'productId',
+  name: 'name',
+  slug: 'slug',
+  image: 'image'
+};
+
 
 exports.Prisma.ModelName = {
   Product: 'Product',
@@ -281,7 +322,9 @@ exports.Prisma.ModelName = {
   Account: 'Account',
   Session: 'Session',
   VerificationToken: 'VerificationToken',
-  Cart: 'Cart'
+  Cart: 'Cart',
+  Order: 'Order',
+  OrderItem: 'OrderItem'
 };
 
 /**
