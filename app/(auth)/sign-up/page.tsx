@@ -33,7 +33,7 @@ export default async function SignUnPage({
         <CardHeader className="space-y-4">
           <Link href="/" className="flex-center">
             <Image
-              src="/images/logo.svg"
+              src="/images/logo.jpg"
               alt={`${APP_NAME} logo`}
               height={100}
               width={100}
