@@ -39,13 +39,11 @@ export default async function page() {
 
   const userAddress = ConvertJsonDbToString(user.address) as ShippingAddress;
 
-  console.log(userAddress);
-
   return (
     <>
       <CheckoutSteps current={3} />
       <h1 className="py-4 text-2xl">Place Order</h1>
-      <div className="grid md:grid-cols-3 md:gap-5">
+      <div className="grid md:grid-cols-3 md:gap-5 space-y-5">
         <div className="md:col-span-2 overflow-x-auto space-y-4">
           <Card>
             <CardContent className="p-4 gap-4">

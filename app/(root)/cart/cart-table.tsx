@@ -32,7 +32,7 @@ export default function CartTable({ cart }: { cart?: Cart }) {
           Cart is empty. <Link href="/">Go Shopping</Link>
         </div>
       ) : (
-        <div className="grid md:grid-cols-4 md:gap-5">
+        <div className="grid md:grid-cols-4 space-y-5 md:gap-5">
           <div className="overflow-x-auto md:col-span-3">
             <Table>
               <TableHeader>
@@ -45,10 +45,10 @@ export default function CartTable({ cart }: { cart?: Cart }) {
               <TableBody>
                 {cart.items.map((item) => (
                   <TableRow key={item.slug}>
-                    <TableCell>
+                    <TableCell className="align-middle">
                       <Link
                         href={`/product/${item.slug}`}
-                        className="flex items-center"
+                        className="flex items-center flex-wrap gap-2"
                       >
                         <Image
                           src={item.image}
@@ -59,7 +59,7 @@ export default function CartTable({ cart }: { cart?: Cart }) {
                         <span className="px-2">{item.name}</span>
                       </Link>
                     </TableCell>
-                    <TableCell className="flex-center gap-2">
+                    <TableCell className="align-middle space-x-2">
                       <Button
                         disabled={isPending}
                         variant="outline"

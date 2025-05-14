@@ -96,7 +96,6 @@ export default function PaymentMethodForm({
                 )}
               />
             </div>
-
             <div className="flex gap-2">
               <Button type="submit" disabled={isPending}>
                 {isPending ? (
