@@ -41,6 +41,11 @@ export function ConvertJsonDbToStringArray(value: any) {
   return value ? JSON.parse(value) : [];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function ConvertJsonDbToString(value: any) {
+  return typeof value === "string" ? JSON.parse(value) : null;
+}
+
 export function round2(value: number | string) {
   if (typeof value === "number") {
     return Math.round((value + Number.EPSILON) * 100) / 100;
