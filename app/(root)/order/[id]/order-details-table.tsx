@@ -107,22 +107,22 @@ export default function OrderDetailsTable({ order }: { order: any }) {
             </CardContent>
           </Card>
         </div>
-        <div>
+        <div className=" col-span-2 md:col-auto">
           <Card>
             <CardContent className="p-4 gap-4 space-y-4">
-              <div className=" flex justify-between">
+              <div className="flex justify-between">
                 <div>Items</div>
                 <div>{formatCurrency(itemsPrice)}</div>
               </div>
-              <div className=" flex justify-between">
+              <div className="flex justify-between">
                 <div>Tax</div>
                 <div>{formatCurrency(taxPrice)}</div>
               </div>
-              <div className=" flex justify-between">
+              <div className="flex justify-between">
                 <div>Shipping</div>
                 <div>{formatCurrency(shippingPrice)}</div>
               </div>
-              <div className=" flex justify-between">
+              <div className="flex justify-between">
                 <div>Total</div>
                 <div>{formatCurrency(totalPrice)}</div>
               </div>
