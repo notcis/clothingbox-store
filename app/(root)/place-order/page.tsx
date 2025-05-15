@@ -12,11 +12,12 @@ import {
 } from "@/components/ui/table";
 import { getMyCart } from "@/lib/actions/cart.actions";
 import { getUserById } from "@/lib/actions/user.actions";
-import { ConvertJsonDbToString, formatCurrency } from "@/lib/utils";
+import { formatCurrency } from "@/lib/utils";
 import { ShippingAddress } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import PlaceOrderForm from "./place-order-form";
 
 export const metadata = {
   title: "Place Order",
@@ -37,7 +38,7 @@ export default async function page() {
 
   if (!user.paymentMethod) redirect("/payment-method");
 
-  const userAddress = ConvertJsonDbToString(user.address) as ShippingAddress;
+  const userAddress = user.address as ShippingAddress;
 
   return (
     <>
@@ -132,6 +133,7 @@ export default async function page() {
                 <div>Total</div>
                 <div>{formatCurrency(cart.totalPrice)}</div>
               </div>
+              <PlaceOrderForm />
             </CardContent>
           </Card>
         </div>

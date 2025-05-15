@@ -22,13 +22,11 @@ export default async function page() {
   if (!userId) throw new Error("No user Id");
 
   const user = await getUserById(userId);
-  const address =
-    typeof user.address === "string" ? JSON.parse(user.address) : null;
 
   return (
     <>
       <CheckoutSteps current={1} />
-      <ShippingAddressForm address={address as ShippingAddress} />
+      <ShippingAddressForm address={user.address as ShippingAddress} />
     </>
   );
 }

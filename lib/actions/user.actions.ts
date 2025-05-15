@@ -10,7 +10,7 @@ import {
 import { auth, signIn, signOut } from "@/auth";
 import { hashSync } from "bcrypt-ts-edge";
 import { prisma } from "@/db/prisma";
-import { formatError } from "../utils";
+import { ConvertJsonDbToString, formatError } from "../utils";
 import { ShippingAddress } from "@/types";
 import { z } from "zod";
 
@@ -94,7 +94,7 @@ export async function getUserById(userId: string) {
 
   if (!user) throw new Error("User not found");
 
-  return user;
+  return { ...user, address: ConvertJsonDbToString(user.address) };
 }
 
 export async function updateUserAddress(data: ShippingAddress) {
@@ -154,7 +154,6 @@ export async function updateUserPaymentMethod(
       },
     });
 
-    
     return {
       success: true,
       message: "User updated successful",
