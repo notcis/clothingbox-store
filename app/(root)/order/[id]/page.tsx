@@ -19,8 +19,6 @@ export default async function page({
 
   if (!order) notFound();
 
-  console.log(order.orderitem);
-
   return (
     <OrderDetailsTable
       order={order}
