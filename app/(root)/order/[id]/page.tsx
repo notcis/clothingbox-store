@@ -21,5 +21,10 @@ export default async function page({
 
   console.log(order.orderitem);
 
-  return <OrderDetailsTable order={order} />;
+  return (
+    <OrderDetailsTable
+      order={order}
+      paypalClientId={process.env.PAYPAL_CLIENT_ID || "sb"}
+    />
+  );
 }
