@@ -32,8 +32,8 @@ export default function CartTable({ cart }: { cart?: Cart }) {
           Cart is empty. <Link href="/">Go Shopping</Link>
         </div>
       ) : (
-        <div className="grid md:grid-cols-4 space-y-5 md:gap-5">
-          <div className="overflow-x-auto md:col-span-3">
+        <div className="grid lg:grid-cols-4 space-y-5 lg:gap-5">
+          <div className="overflow-x-auto lg:col-span-3">
             <Table>
               <TableHeader>
                 <TableRow>
