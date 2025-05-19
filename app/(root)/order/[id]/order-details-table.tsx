@@ -22,16 +22,22 @@ import Link from "next/link";
 import {
   approvePayPalOrder,
   createPayPalOrder,
+  deliverOrder,
+  updateOrderToPaidCOD,
 } from "@/lib/actions/order.action";
 import { toast } from "sonner";
+import { useTransition } from "react";
+import { Button } from "@/components/ui/button";
 
 export default function OrderDetailsTable({
   order,
   paypalClientId,
+  isAdmin,
 }: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   order: any;
   paypalClientId: string;
+  isAdmin: boolean;
 }) {
   const {
     id,
@@ -79,6 +85,52 @@ export default function OrderDetailsTable({
     toast.success(res.message);
   };
 
+  const MarkAsPaidButton = () => {
+    const [isPending, startTransition] = useTransition();
+
+    return (
+      <Button
+        type="button"
+        disabled={isPending}
+        onClick={() =>
+          startTransition(async () => {
+            const res = await updateOrderToPaidCOD(order.id);
+            if (!res.success) {
+              toast.error(res.message);
+              return;
+            }
+            toast.success(res.message);
+          })
+        }
+      >
+        {isPending ? "processing..." : "Mark As Paid"}
+      </Button>
+    );
+  };
+
+  const MarkAsDeliveredButton = () => {
+    const [isPending, startTransition] = useTransition();
+
+    return (
+      <Button
+        type="button"
+        disabled={isPending}
+        onClick={() =>
+          startTransition(async () => {
+            const res = await deliverOrder(order.id);
+            if (!res.success) {
+              toast.error(res.message);
+              return;
+            }
+            toast.success(res.message);
+          })
+        }
+      >
+        {isPending ? "processing..." : "Mark As Delevered"}
+      </Button>
+    );
+  };
+
   return (
     <>
       <h1 className="py-4 text-2xl">Order {formatId(id)}</h1>
@@ -107,7 +159,7 @@ export default function OrderDetailsTable({
               </p>
               {isDelivered ? (
                 <Badge variant="secondary">
-                  Paid at {formatDateTime(deliveredAt!).dateTime}
+                  Delivered at {formatDateTime(deliveredAt!).dateTime}
                 </Badge>
               ) : (
                 <Badge variant="destructive">Not Delivered</Badge>
@@ -185,6 +237,11 @@ export default function OrderDetailsTable({
                   </PayPalScriptProvider>
                 </div>
               )}
+
+              {isAdmin && !isPaid && paymentMethod === "CashOnDelivery" && (
+                <MarkAsPaidButton />
+              )}
+              {isAdmin && isPaid && !isDelivered && <MarkAsDeliveredButton />}
             </CardContent>
           </Card>
         </div>

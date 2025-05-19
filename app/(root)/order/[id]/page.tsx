@@ -1,6 +1,7 @@
 import { getOrderById } from "@/lib/actions/order.action";
 import { notFound } from "next/navigation";
 import OrderDetailsTable from "./order-details-table";
+import { auth } from "@/auth";
 
 export const metadata = {
   title: "Order Details",
@@ -19,10 +20,13 @@ export default async function page({
 
   if (!order) notFound();
 
+  const session = await auth();
+
   return (
     <OrderDetailsTable
       order={order}
       paypalClientId={process.env.PAYPAL_CLIENT_ID || "sb"}
+      isAdmin={session?.user.role === "admin" || false}
     />
   );
 }
