@@ -15,11 +15,15 @@ export const insertProductSchema = z.object({
   category: z.string().min(3, "Category must be at least 3 characters"),
   brand: z.string().min(3, "Brand must be at least 3 characters"),
   description: z.string().min(3, "Description must be at least 3 characters"),
-  stock: z.coerce.number(),
-  images: z.string().min(1, "Product must have at least one"),
-  isFeatured: z.boolean(),
-  banner: z.string().nullable(),
+  stock: z.coerce.number().min(0, "stock at least 0"),
+  images: z.array(z.string()).min(1, "Product must have at least one"),
+  /* isFeatured: z.boolean(),
+  banner: z.string().nullable(), */
   price: currency,
+});
+
+export const updateProductSchema = insertProductSchema.extend({
+  id: z.string().min(1, "Id is required").optional(),
 });
 
 export const signInFormSchema = z.object({

@@ -413,7 +413,7 @@ export const deleteOrder = async (id: string) => {
     revalidatePath("/admin/orders");
     return {
       success: true,
-      message: "Order delete successfully",
+      message: "Order deleted successfully",
     };
   } catch (error) {
     return {

@@ -76,7 +76,7 @@ export default async function page({
             ))}
           </TableBody>
         </Table>
-        {orders.totalPages > 1 && (
+        {orders?.totalPages && orders.totalPages >= 1 && (
           <Pagination
             page={Number(page) || 1}
             totalPages={orders?.totalPages}
