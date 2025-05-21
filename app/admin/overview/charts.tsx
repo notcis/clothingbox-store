@@ -22,7 +22,7 @@ export default function Charts({
           fontSize={12}
           tickLine={false}
           axisLine={false}
-          tickFormatter={(value) => `$${value}`}
+          tickFormatter={(value) => `฿${value}`}
         />
         <Bar
           dataKey="totalSales"

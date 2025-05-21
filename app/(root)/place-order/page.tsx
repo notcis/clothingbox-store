@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/table";
 import { getMyCart } from "@/lib/actions/cart.actions";
 import { getUserById } from "@/lib/actions/user.actions";
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency, formatNumber } from "@/lib/utils";
 import { ShippingAddress } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -105,7 +105,7 @@ export default async function page() {
                         <span className=" px-2">{item.qty}</span>
                       </TableCell>
                       <TableCell className=" text-right">
-                        ${item.price}
+                        {formatNumber(Number(item.price))}
                       </TableCell>
                     </TableRow>
                   ))}

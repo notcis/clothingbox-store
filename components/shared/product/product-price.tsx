@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn, formatNumber } from "@/lib/utils";
 
 export default function ProductPrice({
   value,
@@ -13,8 +13,8 @@ export default function ProductPrice({
 
   return (
     <p className={cn("text-2xl", className)}>
-      <span className="text-xs align-super">$</span>
-      {inValue}
+      <span className="text-xs align-super">฿</span>
+      {formatNumber(Number(inValue))}
       <span className="text-xs align-super">.{floatValue}</span>
     </p>
   );

@@ -31,8 +31,6 @@ export default async function page({
     category,
   });
 
-  console.log(products);
-
   return (
     <div className="space-y-2">
       <div className="flex-between">
@@ -67,7 +65,7 @@ export default async function page({
               <TableCell>{product.rating}</TableCell>
               <TableCell className=" flex gap-1">
                 <Button variant="outline" size="sm" asChild>
-                  <Link href={`/admin/products/${product.slug}`}>Edit</Link>
+                  <Link href={`/admin/products/${product.id}`}>Edit</Link>
                 </Button>
                 <DeleteDialog id={product.id} action={deleteProduct} />
               </TableCell>

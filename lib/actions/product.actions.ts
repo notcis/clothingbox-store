@@ -1,5 +1,9 @@
 "use server";
-import { ConvertJsonDbToStringArray, formatError } from "../utils";
+import {
+  ConvertJsonDbToStringArray,
+  convertToPlainObject,
+  formatError,
+} from "../utils";
 import { LATEST_PRODUCTS_LIMIT, PAGE_SIZE } from "../constants";
 import { prisma } from "@/db/prisma";
 import { revalidatePath } from "next/cache";
@@ -18,12 +22,11 @@ export async function getLatestProducts() {
     ...product,
     price: product.price.toString(), // หรือ +product.price เพื่อให้เป็น number
     rating: product.rating.toString(), // ถ้า rating ก็เป็น Decimal
-    stock: product.stock.toString(),
     numReviews: product.numReviews.toString(),
     images: ConvertJsonDbToStringArray(product.images),
   }));
 
-  return sanitizedProducts;
+  return convertToPlainObject(sanitizedProducts);
 }
 
 export async function getProductBySlug(slug: string) {
@@ -45,10 +48,32 @@ export async function getProductBySlug(slug: string) {
   };
 }
 
+export async function getProductById(productId: string) {
+  const data = await prisma.product.findFirst({
+    where: { id: productId },
+  });
+
+  if (!data) {
+    return null;
+  }
+
+  const newData = {
+    ...data,
+    images: ConvertJsonDbToStringArray(data.images),
+    price: data.price.toString(), // หรือ +product.price เพื่อให้เป็น number
+    rating: data.rating.toString(), // ถ้า rating ก็เป็น Decimal
+    numReviews: data.numReviews.toString(),
+  };
+
+  return convertToPlainObject(newData);
+}
+
 export async function getAllProducts({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   query,
   limit = PAGE_SIZE,
   page,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   category,
 }: {
   query: string;
@@ -116,7 +141,6 @@ export async function createProduct(data: z.infer<typeof insertProductSchema>) {
       data: {
         ...product,
         images: JSON.stringify(product.images),
-        isFeatured: false,
       },
     });
 
@@ -150,7 +174,10 @@ export async function updateProduct(data: z.infer<typeof updateProductSchema>) {
       where: {
         id: product.id,
       },
-      data: product,
+      data: {
+        ...product,
+        images: JSON.stringify(product.images),
+      },
     });
 
     revalidatePath("/admin/products");

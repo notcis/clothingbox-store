@@ -11,7 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { addItemToCart, removeItemFromCart } from "@/lib/actions/cart.actions";
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency, formatNumber } from "@/lib/utils";
 import { Cart } from "@/types";
 import { ArrowRightIcon, LoaderIcon, MinusIcon, PlusIcon } from "lucide-react";
 import Image from "next/image";
@@ -98,7 +98,9 @@ export default function CartTable({ cart }: { cart?: Cart }) {
                         )}
                       </Button>
                     </TableCell>
-                    <TableCell className="text-right">${item.price}</TableCell>
+                    <TableCell className="text-right">
+                      {formatNumber(Number(item.price))}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>

@@ -15,7 +15,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { formatCurrency, formatDateTime, formatId } from "@/lib/utils";
+import {
+  formatCurrency,
+  formatDateTime,
+  formatId,
+  formatNumber,
+} from "@/lib/utils";
 import { OrderItem } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -198,7 +203,7 @@ export default function OrderDetailsTable({
                         <span className=" px-2">{item.qty}</span>
                       </TableCell>
                       <TableCell className=" text-right">
-                        ${item.price}
+                        {formatNumber(Number(item.price))}
                       </TableCell>
                     </TableRow>
                   ))}
