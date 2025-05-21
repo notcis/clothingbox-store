@@ -65,7 +65,7 @@ export async function addItemToCart(data: CartItem) {
 
       return {
         success: true,
-        message: `${product.name} added to cart 1`,
+        message: `${product.name} added to cart`,
       };
     } else {
       const existItem = (cart.items as CartItem[]).find(
@@ -95,7 +95,7 @@ export async function addItemToCart(data: CartItem) {
         success: true,
         message: `${product.name} ${
           existItem ? "updated in" : "added to"
-        } cart 2`,
+        } cart`,
       };
     }
   } catch (error) {

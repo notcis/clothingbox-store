@@ -19,7 +19,7 @@ export default function ProductCard({ product }: { product: Product }) {
         </Link>
       </CardHeader>
       <CardContent className="p-4 grid gap-4">
-        <div className="text-xs">{product.brand}</div>
+        <div className="text-xs">{product.category}</div>
         <Link href={`/product/${product.slug}`}>
           <h2 className="text-sm font-medium">{product.name}</h2>
         </Link>

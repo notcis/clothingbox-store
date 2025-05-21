@@ -29,9 +29,7 @@ export default async function ProductDetailPage({
           </div>
           <div className="col-span-2 p-5">
             <div className="flex flex-col gap-6">
-              <p>
-                {product.brand} {product.category}
-              </p>
+              <p>{product.category}</p>
               <h1 className="h3-bold">{product.name}</h1>
               <p>
                 {product.rating.toString()} of {product.numReviews} Reviews
