@@ -16,7 +16,7 @@ model Product {
   category    String
   images      Json        @db.Json
   brand       String
-  description String
+  description String      @db.Text
   stock       Int
   price       Decimal     @default(0) @db.Decimal(12, 2)
   rating      Decimal     @default(0) @db.Decimal(3, 2)
