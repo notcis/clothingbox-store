@@ -43,7 +43,6 @@ export async function getProductBySlug(slug: string) {
     images: ConvertJsonDbToStringArray(data.images),
     price: data.price.toString(), // หรือ +product.price เพื่อให้เป็น number
     rating: data.rating.toString(), // ถ้า rating ก็เป็น Decimal
-    stock: data.stock.toString(),
     numReviews: data.numReviews.toString(),
   };
 }
