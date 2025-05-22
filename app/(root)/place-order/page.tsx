@@ -34,7 +34,7 @@ export default async function page() {
 
   if (!cart || cart.items.length === 0) redirect("/cart");
 
-  if (!user.address) redirect("/shipping-address");
+  if (!user?.address) redirect("/shipping-address");
 
   if (!user.paymentMethod) redirect("/payment-method");
 
