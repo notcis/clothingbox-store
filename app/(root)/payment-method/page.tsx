@@ -18,7 +18,7 @@ export default async function page() {
   return (
     <>
       <CheckoutSteps current={2} />
-      <PaymentMethodForm preferredPaymentMethod={user.paymentMethod} />
+      <PaymentMethodForm preferredPaymentMethod={user?.paymentMethod || null} />
     </>
   );
 }
