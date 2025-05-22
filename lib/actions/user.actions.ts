@@ -6,6 +6,7 @@ import {
   shippingAddressSchema,
   signInFormSchema,
   signUpFormSchema,
+  updateUserSchema,
 } from "../validators";
 import { auth, signIn, signOut } from "@/auth";
 import { hashSync } from "bcrypt-ts-edge";
@@ -94,9 +95,9 @@ export async function getUserById(userId: string) {
     where: { id: userId },
   });
 
-  if (!user) throw new Error("User not found");
-
-  return { ...user, address: ConvertJsonDbToString(user.address) };
+  return user
+    ? { ...user, address: ConvertJsonDbToString(user.address) }
+    : null;
 }
 
 export async function updateUserAddress(data: ShippingAddress) {
@@ -236,6 +237,31 @@ export async function deleteUser(id: string) {
     return {
       success: true,
       message: "User deleted successfully",
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: formatError(error),
+    };
+  }
+}
+
+export async function updateUser(user: z.infer<typeof updateUserSchema>) {
+  try {
+    await prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        name: user.name,
+        role: user.role,
+      },
+    });
+
+    revalidatePath("/admin/users/");
+    return {
+      success: true,
+      message: "User updated successfully",
     };
   } catch (error) {
     return {

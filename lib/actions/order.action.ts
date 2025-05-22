@@ -39,7 +39,7 @@ export async function createOrder() {
         redirectTo: "/cart",
       };
 
-    if (!user.address)
+    if (!user?.address)
       return {
         success: false,
         message: "No shipping address",
@@ -376,11 +376,29 @@ export async function getOrderSummary() {
 export async function getAllOrders({
   limit = PAGE_SIZE,
   page,
+  query,
 }: {
   limit?: number;
   page: number;
+  query: string;
 }) {
+  const queryFilter: Prisma.OrderWhereInput =
+    query && query !== "all"
+      ? {
+          user: {
+            is: {
+              name: {
+                contains: query,
+              },
+            },
+          },
+        }
+      : {};
+
   const data = await prisma.order.findMany({
+    where: {
+      ...queryFilter,
+    },
     orderBy: {
       createdAt: "desc",
     },

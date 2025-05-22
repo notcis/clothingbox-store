@@ -49,5 +49,6 @@ export const productDefaultValues = {
   banner: null,
 };
 
-export const UPLOAD_URL_API =
-  process.env.UPLOAD_URL_API || "https://line-admin.coopmsds.com/api/upload";
+export const USER_ROLES = process.env.USER_ROLES
+  ? process.env.USER_ROLES.split(", ")
+  : ["admin", "user"];
