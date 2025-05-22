@@ -13,6 +13,8 @@ import { prisma } from "@/db/prisma";
 import { ConvertJsonDbToString, formatError } from "../utils";
 import { ShippingAddress } from "@/types";
 import { z } from "zod";
+import { PAGE_SIZE } from "../constants";
+import { revalidatePath } from "next/cache";
 
 export async function signInWithCredentials(
   prevState: unknown,
@@ -27,7 +29,7 @@ export async function signInWithCredentials(
     await signIn("credentials", user);
     return {
       success: true,
-      message: "Sign in successful",
+      message: "Sign in successfully",
     };
   } catch (error) {
     if (isRedirectError(error)) {
@@ -73,7 +75,7 @@ export async function signUpUser(prevState: unknown, formData: FormData) {
 
     return {
       success: true,
-      message: "User registered successful",
+      message: "User registered successfully",
     };
   } catch (error) {
     if (isRedirectError(error)) {
@@ -120,7 +122,7 @@ export async function updateUserAddress(data: ShippingAddress) {
 
     return {
       success: true,
-      message: "User updated successful",
+      message: "User updated successfully",
     };
   } catch (error) {
     return {
@@ -156,7 +158,7 @@ export async function updateUserPaymentMethod(
 
     return {
       success: true,
-      message: "User updated successful",
+      message: "User updated successfully",
     };
   } catch (error) {
     return {
@@ -188,7 +190,52 @@ export async function updateProfile(user: { name: string; email: string }) {
 
     return {
       success: true,
-      message: "User updated successful",
+      message: "User updated successfully",
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: formatError(error),
+    };
+  }
+}
+
+export async function getAllusers({
+  limit = PAGE_SIZE,
+  page,
+}: {
+  limit?: number;
+  page: number;
+}) {
+  const data = await prisma.user.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: limit,
+    skip: (page - 1) * limit,
+  });
+
+  const dataCount = await prisma.user.count();
+
+  return {
+    data,
+    totalPages: Math.ceil(dataCount / limit),
+  };
+}
+
+export async function deleteUser(id: string) {
+  try {
+    await prisma.user.delete({
+      where: {
+        id,
+      },
+    });
+
+    revalidatePath("/admin/users");
+
+    return {
+      success: true,
+      message: "User deleted successfully",
     };
   } catch (error) {
     return {
