@@ -22,17 +22,29 @@ export const metadata = {
 export default async function page({
   searchParams,
 }: {
-  searchParams: Promise<{ page: string }>;
+  searchParams: Promise<{ page: string; query: string }>;
 }) {
   await requireAdmin();
 
-  const { page = "1" } = await searchParams;
+  const { page = "1", query: searchText } = await searchParams;
 
-  const users = await getAllusers({ page: Number(page) });
+  const users = await getAllusers({ page: Number(page), query: searchText });
 
   return (
     <div className="space-y-2">
-      <h2 className="h2-bold">Users</h2>
+      <div className=" flex items-center gap-3">
+        <h1 className="h2-bold">Users</h1>
+        {searchText && (
+          <div>
+            Filtered by <i>&quot;{searchText}&quot;</i>{" "}
+            <Link href="/admin/users">
+              <Button variant="outline" size="sm">
+                Remove Filter
+              </Button>
+            </Link>
+          </div>
+        )}
+      </div>
       <div className="overflow-x-auto">
         <Table>
           <TableHeader>
