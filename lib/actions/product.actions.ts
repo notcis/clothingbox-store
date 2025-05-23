@@ -203,3 +203,33 @@ export async function updateProduct(data: z.infer<typeof updateProductSchema>) {
     };
   }
 }
+
+export async function getAllCategories() {
+  const data = await prisma.product.groupBy({
+    by: ["category"],
+    _count: true,
+  });
+
+  return data;
+}
+
+export async function getFeaturedProduct() {
+  const data = await prisma.product.findMany({
+    where: {
+      isFeatured: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 4,
+  });
+  const sanitizedProducts = data.map((product) => ({
+    ...product,
+    price: product.price.toString(), // หรือ +product.price เพื่อให้เป็น number
+    rating: product.rating.toString(), // ถ้า rating ก็เป็น Decimal
+    numReviews: product.numReviews.toString(),
+    images: ConvertJsonDbToStringArray(product.images),
+  }));
+
+  return convertToPlainObject(sanitizedProducts);
+}
