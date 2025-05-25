@@ -18,18 +18,31 @@ import Link from "next/link";
 export default async function page({
   searchParams,
 }: {
-  searchParams: Promise<{ page: string; query: string; category: string }>;
+  searchParams: Promise<{
+    page: string;
+    query: string;
+    category: string;
+    price: string;
+    rating: string;
+    sort: string;
+  }>;
 }) {
   await requireAdmin();
 
   const page = Number((await searchParams).page) || 1;
   const searchText = (await searchParams).query || "";
   const category = (await searchParams).category || "";
+  const price = (await searchParams).price || "";
+  const rating = (await searchParams).rating || "";
+  const sort = (await searchParams).sort || "";
 
   const products = await getAllProducts({
     query: searchText,
     page,
     category,
+    price,
+    rating,
+    sort,
   });
 
   return (
