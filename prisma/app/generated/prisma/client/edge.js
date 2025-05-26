@@ -329,7 +329,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\1-Udemy\\nextjs\\Course-5\\prostore\\prisma\\app\\generated\\prisma\\client",
+      "value": "D:\\github\\Udemy-Couse\\nextJs\\typscript\\prostore\\prisma\\app\\generated\\prisma\\client",
       "fromEnvVar": null
     },
     "config": {
@@ -343,7 +343,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\1-Udemy\\nextjs\\Course-5\\prostore\\prisma\\schema.prisma",
+    "sourceFilePath": "D:\\github\\Udemy-Couse\\nextJs\\typscript\\prostore\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -357,11 +357,12 @@ const config = {
     "db"
   ],
   "activeProvider": "mysql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "mysql://coop_nextjs:aspire49310407@27.254.145.135/coop_nextjs_test"
+        "value": null
       }
     }
   },

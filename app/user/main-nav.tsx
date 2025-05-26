@@ -31,7 +31,7 @@ export default function MainNav({
           key={item.href}
           href={item.href}
           className={cn(
-            "text-sm font-medium",
+            "text-sm font-medium hover:text-primary",
             pathname.includes(item.href) ? "" : "text-muted-foreground"
           )}
         >
