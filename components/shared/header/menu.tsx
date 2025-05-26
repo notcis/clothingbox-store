@@ -31,7 +31,7 @@ export default function Menu() {
           <SheetContent className="flex flex-col items-start">
             <SheetTitle>Menu</SheetTitle>
             <ModeToggle />
-            <Button asChild variant="ghost">
+            <Button variant="ghost" asChild>
               <Link href="/cart">
                 <ShoppingCartIcon />
               </Link>
