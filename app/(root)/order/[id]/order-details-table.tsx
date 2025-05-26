@@ -33,16 +33,19 @@ import {
 import { toast } from "sonner";
 import { useTransition } from "react";
 import { Button } from "@/components/ui/button";
+import StripePayment from "./stripe-payment";
 
 export default function OrderDetailsTable({
   order,
   paypalClientId,
   isAdmin,
+  stripeClientSecret,
 }: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   order: any;
   paypalClientId: string;
   isAdmin: boolean;
+  stripeClientSecret: string | null;
 }) {
   const {
     id,
@@ -241,6 +244,14 @@ export default function OrderDetailsTable({
                     />
                   </PayPalScriptProvider>
                 </div>
+              )}
+
+              {!isPaid && paymentMethod === "Stripe" && stripeClientSecret && (
+                <StripePayment
+                  priceInCents={Number(order.totalPrice) * 100}
+                  orderId={order.id}
+                  clientSecret={stripeClientSecret}
+                />
               )}
 
               {isAdmin && !isPaid && paymentMethod === "CashOnDelivery" && (
